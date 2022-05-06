@@ -1,26 +1,78 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './PeriodicTable.css'
+import PeriodicTable, { OnClick, ElementType } from './components/periodic-table/PeriodicTable';
+import lodash from 'lodash';
+import { MF as MolecularFormula } from 'react-mf'
+
+type FormulaUnit = {
+  element: ElementType;
+  count: number;
+}
+type Formula = FormulaUnit[];
 
 function App() {
+
+  const [formula, setFormula] = React.useState<Formula>([])
+
+  const onElementClick: OnClick = (e, element) => {
+    
+    if(formula.length === 0) {
+      setFormula([{
+        count: 1,
+        element: element
+      }]);
+      return;
+    }
+    const clone = lodash.cloneDeep(formula);
+
+    const lastUnit = clone[clone.length - 1];
+    if(lastUnit.element.Symbol === element.Symbol) {
+      lastUnit.count += 1
+      
+    }
+    else {
+      clone.push({
+        element: element,
+        count: 1
+      })
+    }
+
+    setFormula(clone)
+  }
+
+  const convertFormula = () => {
+    return formula.reduce((acc, curr)=>{
+      acc += curr.element.Symbol + curr.count;
+      return acc;
+    }, '');
+  }
+
+  const totalMolecularWeight = () => {
+    return formula.reduce((acc, curr)=>{
+      acc += (parseFloat(curr.element['Atomic Weight']) * curr.count)
+      return acc;
+    }, 0);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Periodic Table of Elements</h1>
+      <div style={{ display: 'flex'}}>
+        <div style={{ width: 100, flexGrow: 0 }}></div>
+        <div style={{ flexGrow: 1 }}><PeriodicTable onClick={onElementClick} squareSize={55} margin={2} /></div>
+        <div style={{ width: 100, flexGrow: 0 }}>
+          <div style={{ marginLeft: 10, border: '1px solid black', borderRadius: 3, position: 'absolute', padding: 10 }}>
+            <div style={{ height: 20 }}><MolecularFormula mf={convertFormula()} /></div>
+            <span style={{ whiteSpace: 'nowrap' }}>{ Math.round(totalMolecularWeight() * 1000) / 1000 } g/mol</span><br />
+            <button onClick={()=>setFormula([])}>Clear</button>
+          </div>
+        </div>
+      </div>
+     
     </div>
   );
 }
 
 export default App;
+
