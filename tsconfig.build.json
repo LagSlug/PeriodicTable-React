@@ -19,9 +19,13 @@
     "isolatedModules": true,
     "noEmit": false,
     "jsx": "react-jsx",
-    "outDir": "dist"
+    "outDir": "dist",
+    "declaration": true
   },
   "include": [
-    "src"
+    "src/components/periodic-table"
+  ],
+  "exclude": [
+    "src/components/periodic-table/convert.js"
   ]
 }
