@@ -6,6 +6,21 @@
   npm install @celadora/periodic-table
 ```
 
+## Usage
+```tsx
+  import PeriodicTable, { OnClick, ElementType } from '@celadora/periodic-table';
+
+  function App() {
+    const handleClick: OnClick = (e, element) => {
+      console.log(element);
+    }
+
+    return (
+      <PeriodicTable onClick={handleClick} squareSize={55} margin={2} /> 
+    )
+
+  }
+```
 
 ## Available Scripts
 
