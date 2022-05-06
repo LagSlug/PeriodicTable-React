@@ -1,8 +1,7 @@
 {
   "name": "@celadora/periodic-table",
-  "version": "0.1.8",
+  "version": "0.1.13",
   "private": false,
-  "main": "index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
@@ -22,7 +21,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf dist && tsc --project tsconfig.build.json && npm version patch --no-git-tag-version && cp package.json ./dist",
+    "build": "rm -rf dist && tsc --project tsconfig.build.json && npm run copy-package",
+    "copy-package": "cp package.dist.json ./dist/package.json",
+    "publish": "npm version patch --no-git-tag-version && cd dist && npm version patch && cp package.json ../package.dist.json && npm publish",
     "react-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
