@@ -58,11 +58,10 @@ function App() {
   return (
     <div className="App">
       <h1>Periodic Table of Elements</h1>
-      <div style={{ display: 'flex'}}>
-        <div style={{ width: 100, flexGrow: 0 }}></div>
+      <div style={{ display: 'flex', position: 'relative'}}>
         <div style={{ flexGrow: 1 }}><PeriodicTable onClick={onElementClick} squareSize={55} margin={2} /></div>
-        <div style={{ width: 100, flexGrow: 0 }}>
-          <div style={{ marginLeft: 10, border: '1px solid black', borderRadius: 3, position: 'absolute', padding: 10 }}>
+        <div style={{ position: 'absolute', left: 200, width: 480 }}>
+          <div style={{ marginLeft: 10, border: '1px solid black', borderRadius: 3, padding: 10, overflow: 'auto' }}>
             <div style={{ height: 20 }}><MolecularFormula mf={convertFormula()} /></div>
             <span style={{ whiteSpace: 'nowrap' }}>{ Math.round(totalMolecularWeight() * 1000) / 1000 } g/mol</span><br />
             <button onClick={()=>setFormula([])}>Clear</button>
