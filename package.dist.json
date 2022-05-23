@@ -1,8 +1,12 @@
 {
   "name": "@celadora/periodic-table",
-  "version": "0.1.13",
+  "version": "0.1.32",
   "private": false,
   "main": "index.js",
   "dependencies": {},
-  "scripts": {}
+  "scripts": {},
+  "keywords": [
+    "periodic table",
+    "react"
+  ]
 }

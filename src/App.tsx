@@ -57,10 +57,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Periodic Table of Elements</h1>
-      <div style={{ display: 'flex', position: 'relative'}}>
-        <div style={{ flexGrow: 1 }}><PeriodicTable onClick={onElementClick} squareSize={55} margin={2} /></div>
-        <div style={{ position: 'absolute', left: 200, width: 480 }}>
+      
+      <header className="App-header">
+        <h2>Periodic Table of Elements</h2>
+      </header>
+
+      <div style={{ display: 'inline-block', position: 'relative', marginTop: 20}}>
+        <PeriodicTable onClick={onElementClick} squareSize={55} margin={2} />
+        
+        <div style={{ position: 'absolute', left: 200, top: 2, width: 480 }}>
           <div style={{ marginLeft: 10, border: '1px solid black', borderRadius: 3, padding: 10, overflow: 'auto' }}>
             <div style={{ height: 20 }}><MolecularFormula mf={convertFormula()} /></div>
             <span style={{ whiteSpace: 'nowrap' }}>{ Math.round(totalMolecularWeight() * 1000) / 1000 } g/mol</span><br />

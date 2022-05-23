@@ -1,4 +1,4 @@
-# Periodic Table
+Periodic Table of Elements
 
 ## Install
 
@@ -8,7 +8,7 @@
 
 ## Usage
 ```tsx
-  import PeriodicTable, { OnClick, ElementType } from '@celadora/periodic-table';
+  import PeriodicTable, { OnClick } from '@celadora/periodic-table';
 
   function App() {
     const handleClick: OnClick = (e, element) => {
